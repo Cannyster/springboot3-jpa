@@ -3,10 +3,21 @@ package com.cannysters.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
+@Entity //Anotação para fazer o mapeamento objeto relacional do JPA
+@Table(name = "tb_user") //indicando qual tabela vai ser usada
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	@Id // anotação para indicar qual será o Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//Anotação Dizendo que o id sera auto gerado pelo banco
 	private Long id;
 	private String nome;
 	private String email;
