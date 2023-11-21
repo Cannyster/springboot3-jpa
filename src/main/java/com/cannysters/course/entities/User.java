@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 
 @Entity //Anotação para fazer o mapeamento objeto relacional do JPA
-@Table(name = "tb_user") //indicando qual tabela vai ser usada
+@Table(name = "tb_user") //indicando qual o nome da tabela que vai ser criada
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
