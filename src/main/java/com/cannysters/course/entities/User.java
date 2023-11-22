@@ -1,12 +1,15 @@
 package com.cannysters.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -19,11 +22,15 @@ public class User implements Serializable{
 	@Id // anotação para indicar qual será o Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//Anotação Dizendo que o id sera auto gerado pelo banco
 	private Long id;
+	
 	private String nome;
 	private String email;
 	private String phone;
 	private String password;
 	
+	@OneToMany (mappedBy = "client")
+	private List<Order> orders = new ArrayList<>();
+
 	public User() {
 	}
 
@@ -33,6 +40,10 @@ public class User implements Serializable{
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
+	}
+	
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	public Long getId() {
