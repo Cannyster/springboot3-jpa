@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.cannysters.course.entities.Category;
 import com.cannysters.course.entities.Order;
+import com.cannysters.course.entities.OrderItem;
 import com.cannysters.course.entities.Product;
 import com.cannysters.course.entities.User;
 import com.cannysters.course.entities.enums.OrderStatus;
 import com.cannysters.course.repositories.CategoryRepository;
+import com.cannysters.course.repositories.OrderItemRepository;
 import com.cannysters.course.repositories.OrderRepository;
 import com.cannysters.course.repositories.ProductRepository;
 import com.cannysters.course.repositories.UserRepository;
@@ -22,7 +24,7 @@ import com.cannysters.course.repositories.UserRepository;
 @Profile("test") //Anotação indicando que essa configuração vai ser aplicada apenas quando estiver no perfil de teste
 public class TestConfig implements CommandLineRunner{
 
-	@Autowired // Anotação que o proprio spring vai resolver a dependencia e associar uma instancia de user repository automaticamente
+	@Autowired // Anotações que o proprio spring vai resolver a dependencia e associar uma instancia de user repository automaticamente
 	private UserRepository userRepository;
 	
 	@Autowired
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {//tudo que for colocado dentro desse metodo vai ser executado quando o projeto for inicado 
@@ -69,6 +74,14 @@ public class TestConfig implements CommandLineRunner{
 		
 		userRepository.saveAll(Arrays.asList(u1,u2));//Vai salvar todos os itens constantes na lista no banco de dados
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
 	}
 	
 	
