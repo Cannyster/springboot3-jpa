@@ -64,6 +64,10 @@ public class OrderItem {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
+	public Double getSubTotal() {
+		return this.quantity * this.price;
+	}
 
 	@Override
 	public int hashCode() {
